@@ -1,0 +1,1 @@
+docker build -t spark-base ./spark-base && docker build -t spark-master ./spark-master && docker build -t spark-worker ./spark-worker
