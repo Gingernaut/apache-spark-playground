@@ -9,6 +9,10 @@ ENV SCALA_URL "http://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_V
 ENV SBT_URL "https://github.com/sbt/sbt/releases/download/v$SBT_VERSION/sbt-$SBT_VERSION.tgz"
 ENV SPARK_URL "http://apache.mirrors.ionfish.org/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION.tgz"
 
+# http://blog.stuart.axelbrooke.com/python-3-on-spark-return-of-the-pythonhashseed
+ENV PYTHONHASHSEED 0
+ENV PYTHONIOENCODING UTF-8
+
 ## Python/Scala
 RUN apk add --no-cache build-base curl bash python3-dev \
     && python3 -m ensurepip --upgrade \
