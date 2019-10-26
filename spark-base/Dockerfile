@@ -14,6 +14,10 @@ ENV PYTHONHASHSEED 0
 ENV PYTHONIOENCODING UTF-8
 
 ## Python/Scala
+ENV SPARK_HADOOP "spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION"
+ENV SPARK_HOME "/usr/local/$SPARK_HADOOP"
+
+## Python and Scala
 RUN apk add --no-cache build-base curl bash python3-dev \
     && python3 -m ensurepip --upgrade \
     && rm -r /usr/lib/python*/ensurepip \
@@ -29,10 +33,7 @@ RUN curl -fsL $SBT_URL | tar xfz - -C /usr/local  \
     && ln -s /usr/local/sbt/bin/* /usr/local/bin/
 
 ## Spark
-ENV SPARK_HADOOP "spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION"
-ENV SPARK_HOME "/usr/local/$SPARK_HADOOP"
 RUN mkdir $SPARK_HOME \
-    && curl -fsL $SPARK_URL | tar xfz -  --strip-components=1 -C $SPARK_HOME 
-ENV PATH $PATH:$SPARK_HOME/bin
-ENV PATH $PATH:$SPARK_HOME/sbin
-ENV PATH /sbt/bin:$PATH
+    && curl -fsL $SPARK_URL | tar xfz -  --strip-components=1 -C $SPARK_HOME \
+    && ln -s $SPARK_HOME/bin/* /usr/local/bin/ \
+    && ln -s $SPARK_HADOOP/sbin/* /usr/local/bin/

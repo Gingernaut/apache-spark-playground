@@ -1,1 +1,4 @@
 *.zst
+*.txt
+.venv/
+.vscode/
