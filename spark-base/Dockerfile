@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-alpine
+FROM openjdk:15-alpine
 
 ENV SPARK_VERSION 2.4.5
 ENV HADOOP_VERSION 2.7
